@@ -69,7 +69,7 @@ export default function RootLayout({
     email: 'Tracyayuk3@gmail.com',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '329 Ellerton S',
+      streetAddress: '3461 Andrew Court',
       addressLocality: 'Laurel',
       addressRegion: 'MD',
       postalCode: '20724',

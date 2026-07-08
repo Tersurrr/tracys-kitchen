@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {
   ClipboardList,
+  KeyRound,
   LayoutDashboard,
   Menu,
   Tags,
@@ -18,6 +19,7 @@ const NAV = [
   { href: '/admin/menu', label: 'Menu Items', icon: UtensilsCrossed },
   { href: '/admin/categories', label: 'Categories', icon: Tags },
   { href: '/admin/orders', label: 'Orders', icon: ClipboardList },
+  { href: '/admin/passwords', label: 'Passwords', icon: KeyRound },
 ];
 
 export default function MobileAdminNav() {

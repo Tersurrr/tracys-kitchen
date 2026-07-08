@@ -4,6 +4,7 @@ import {
   UtensilsCrossed,
   Tags,
   ClipboardList,
+  KeyRound,
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
@@ -15,6 +16,7 @@ const NAV = [
   { href: '/admin/menu', label: 'Menu Items', icon: UtensilsCrossed },
   { href: '/admin/categories', label: 'Categories', icon: Tags },
   { href: '/admin/orders', label: 'Orders', icon: ClipboardList },
+  { href: '/admin/passwords', label: 'Passwords', icon: KeyRound },
 ];
 
 export default async function AdminLayout({

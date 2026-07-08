@@ -32,13 +32,16 @@ No `/src` folder, per spec.
 3. Under **Authentication → Users**, manually create one admin user (email +
    password) — this is who logs into `/admin`. Sign-ups are not exposed on the
    site, so this is the only account with dashboard access.
-4. Under **Project Settings → API**, copy your Project URL and anon public key.
+4. Under **Project Settings → API**, copy your Project URL, anon public key,
+   and service role key. Keep the service role key server-only; it powers staff
+   password creation and resets from the admin panel.
 
 ## 2. Configure environment variables
 Copy `.env.example` to `.env.local` and fill in:
 ```
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
 NEXT_PUBLIC_WHATSAPP_NUMBER=13012567848
 NEXT_PUBLIC_SITE_URL=https://your-site.netlify.app
 ```

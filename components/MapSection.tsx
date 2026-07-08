@@ -27,7 +27,7 @@ export default function MapSection() {
           />
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4 p-6">
-          <p className="text-sm text-white/70">329 Ellerton S, Laurel, MD 20724</p>
+          <p className="text-sm text-white/70">3461 Andrew Court, Laurel, MD 20724</p>
           <a
             href={directionsUrl}
             target="_blank"

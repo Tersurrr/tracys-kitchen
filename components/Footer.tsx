@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Mail, MapPin } from 'lucide-react';
 
 export default function Footer() {
@@ -6,9 +7,18 @@ export default function Footer() {
     <footer className="border-t border-white/[0.06] bg-charcoal">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-3">
         <div>
-          <h3 className="font-display text-lg font-semibold">
-            Tracy&apos;s <span className="gold-text">Kitchen</span>
-          </h3>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/tracys-kitchen-logo.jpg"
+              alt="Tracy's Kitchen logo"
+              width={48}
+              height={48}
+              className="h-12 w-12 rounded-full bg-white object-contain ring-1 ring-white/10"
+            />
+            <h3 className="font-display text-lg font-semibold">
+              Tracy&apos;s <span className="gold-text">Kitchen</span>
+            </h3>
+          </div>
           <p className="mt-3 text-sm leading-relaxed text-white/60">
             Fresh homemade meals and snacks, prepared exclusively by pre-order.
             Pickup or delivery — always made with care.
@@ -35,7 +45,7 @@ export default function Footer() {
               <Mail className="h-4 w-4 text-gold" /> Tracyayuk3@gmail.com
             </li>
             <li className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-gold" /> 329 Ellerton S, Laurel MD 20724
+              <MapPin className="h-4 w-4 text-gold" /> 3461 Andrew Court, Laurel MD 20724
             </li>
           </ul>
         </div>

@@ -28,7 +28,7 @@ export default function ContactSection() {
                 <Mail className="h-5 w-5 text-gold" /> Tracyayuk3@gmail.com
               </li>
               <li className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-gold" /> 329 Ellerton S, Laurel MD 20724
+                <MapPin className="h-5 w-5 text-gold" /> 3461 Andrew Court, Laurel MD 20724
               </li>
               <li className="flex items-center gap-3">
                 <Clock className="h-5 w-5 text-gold" /> Orders by pre-order only — pickup or delivery

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
@@ -30,8 +31,18 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="font-display text-xl font-semibold tracking-tight">
-          Tracy&apos;s <span className="gold-text">Kitchen</span>
+        <Link href="/" className="flex min-w-0 items-center gap-3">
+          <Image
+            src="/tracys-kitchen-logo.jpg"
+            alt="Tracy's Kitchen logo"
+            width={48}
+            height={48}
+            priority
+            className="h-12 w-12 rounded-full bg-white object-contain ring-1 ring-white/10"
+          />
+          <span className="font-display text-xl font-semibold tracking-tight">
+            Tracy&apos;s <span className="gold-text">Kitchen</span>
+          </span>
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex">
