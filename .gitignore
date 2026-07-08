@@ -1,0 +1,16 @@
+node_modules
+.next
+.env
+.env.local
+.DS_Store
+out
+build
+*.log
+
+.env.local
+.env
+.next
+node_modules
+tracys-kitchen-update.zip
+tsconfig.tsbuildinfo
+*.log
