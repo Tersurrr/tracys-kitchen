@@ -1,8 +1,22 @@
-import { createClient } from '@/lib/supabase/server';
+import { unstable_cache } from 'next/cache';
+import { createClient } from '@supabase/supabase-js';
 import type { MenuItem } from '@/types';
 
-export async function getMenuItems(): Promise<MenuItem[]> {
-  const supabase = await createClient();
+function createPublicClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    }
+  );
+}
+
+export const getMenuItems = unstable_cache(async (): Promise<MenuItem[]> => {
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from('menu_items')
     .select('*, category:categories(*)')
@@ -13,10 +27,10 @@ export async function getMenuItems(): Promise<MenuItem[]> {
     return [];
   }
   return data as unknown as MenuItem[];
-}
+}, ['menu-items'], { revalidate: 300, tags: ['menu'] });
 
-export async function getFeaturedMenuItems(limit = 6): Promise<MenuItem[]> {
-  const supabase = await createClient();
+export const getFeaturedMenuItems = unstable_cache(async (limit = 6): Promise<MenuItem[]> => {
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from('menu_items')
     .select('*, category:categories(*)')
@@ -29,10 +43,10 @@ export async function getFeaturedMenuItems(limit = 6): Promise<MenuItem[]> {
     return [];
   }
   return data as unknown as MenuItem[];
-}
+}, ['featured-menu-items'], { revalidate: 300, tags: ['menu'] });
 
-export async function getMenuItemById(id: string): Promise<MenuItem | null> {
-  const supabase = await createClient();
+export const getMenuItemById = unstable_cache(async (id: string): Promise<MenuItem | null> => {
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from('menu_items')
     .select('*, category:categories(*)')
@@ -44,4 +58,4 @@ export async function getMenuItemById(id: string): Promise<MenuItem | null> {
     return null;
   }
   return data as unknown as MenuItem;
-}
+}, ['menu-item-by-id'], { revalidate: 300, tags: ['menu'] });

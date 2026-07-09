@@ -36,6 +36,7 @@ export default function FoodDetailClient({ item }: { item: MenuItem }) {
             src={item.image || FALLBACK_IMAGE}
             alt={item.name}
             fill
+            sizes="(min-width: 768px) 50vw, 100vw"
             className="object-cover"
             priority
           />

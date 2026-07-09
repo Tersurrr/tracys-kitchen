@@ -1,7 +1,7 @@
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 type MenuItemPayload = {
   name: string;
@@ -56,6 +56,7 @@ export async function createMenuItem(payload: MenuItemPayload) {
     price,
   });
   if (error) return { success: false, error: error.message };
+  revalidateTag('menu');
   revalidatePath('/admin/menu');
   revalidatePath('/menu');
   revalidatePath('/');
@@ -96,6 +97,7 @@ export async function updateMenuItem(id: string, payload: Partial<MenuItemPayloa
 
   const { error } = await supabase.from('menu_items').update(nextPayload).eq('id', id);
   if (error) return { success: false, error: error.message };
+  revalidateTag('menu');
   revalidatePath('/admin/menu');
   revalidatePath('/menu');
   revalidatePath('/');
@@ -108,6 +110,7 @@ export async function deleteMenuItem(id: string) {
 
   const { error } = await supabase.from('menu_items').delete().eq('id', id);
   if (error) return { success: false, error: error.message };
+  revalidateTag('menu');
   revalidatePath('/admin/menu');
   revalidatePath('/menu');
   revalidatePath('/');
@@ -133,7 +136,7 @@ export async function uploadMenuItemImage(formData: FormData) {
 
   const { error } = await supabase.storage
     .from('foods')
-    .upload(fileName, file, { cacheControl: '3600', upsert: false });
+    .upload(fileName, file, { cacheControl: '31536000', upsert: false });
 
   if (error) return { success: false, error: error.message };
 
@@ -150,6 +153,8 @@ export async function createCategory(name: string) {
 
   const { error } = await supabase.from('categories').insert({ name: normalizedName });
   if (error) return { success: false, error: error.message };
+  revalidateTag('categories');
+  revalidateTag('menu');
   revalidatePath('/admin/categories');
   revalidatePath('/admin/menu');
   revalidatePath('/menu');
@@ -166,6 +171,8 @@ export async function updateCategory(id: string, name: string) {
 
   const { error } = await supabase.from('categories').update({ name: normalizedName }).eq('id', id);
   if (error) return { success: false, error: error.message };
+  revalidateTag('categories');
+  revalidateTag('menu');
   revalidatePath('/admin/categories');
   revalidatePath('/admin/menu');
   revalidatePath('/menu');
@@ -179,6 +186,8 @@ export async function deleteCategory(id: string) {
 
   const { error } = await supabase.from('categories').delete().eq('id', id);
   if (error) return { success: false, error: error.message };
+  revalidateTag('categories');
+  revalidateTag('menu');
   revalidatePath('/admin/categories');
   revalidatePath('/admin/menu');
   revalidatePath('/menu');

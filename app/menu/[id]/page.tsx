@@ -1,9 +1,16 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getMenuItemById } from '@/services/menu';
+import { getMenuItemById, getMenuItems } from '@/services/menu';
 import FoodDetailClient from '@/components/FoodDetailClient';
 
 type Props = { params: Promise<{ id: string }> };
+
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  const items = await getMenuItems();
+  return items.map((item) => ({ id: item.id }));
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;

@@ -19,6 +19,7 @@ export default function Hero() {
           alt="Freshly prepared homemade meal from Tracy's Kitchen"
           fill
           priority
+          sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/80 to-charcoal" />

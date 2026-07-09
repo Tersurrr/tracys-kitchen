@@ -34,6 +34,37 @@ const EMPTY_FORM: FormState = {
   image: null,
 };
 
+const MAX_IMAGE_WIDTH = 1200;
+const IMAGE_QUALITY = 0.72;
+
+async function compressImage(file: File) {
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, MAX_IMAGE_WIDTH / bitmap.width);
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(bitmap.width * scale);
+  canvas.height = Math.round(bitmap.height * scale);
+
+  const context = canvas.getContext('2d');
+  if (!context) {
+    bitmap.close();
+    throw new Error('Image compression is not supported in this browser.');
+  }
+
+  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  bitmap.close();
+
+  const blob = await new Promise<Blob | null>((resolve) => {
+    canvas.toBlob(resolve, 'image/jpeg', IMAGE_QUALITY);
+  });
+
+  if (!blob) {
+    throw new Error('Could not compress this image.');
+  }
+
+  const originalName = file.name.replace(/\.[^/.]+$/, '') || 'food-image';
+  return new File([blob], `${originalName}.jpg`, { type: 'image/jpeg' });
+}
+
 export default function MenuAdminClient({
   items,
   categories,
@@ -69,15 +100,22 @@ export default function MenuAdminClient({
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
-    const formData = new FormData();
-    formData.append('file', file);
-    const result = await uploadMenuItemImage(formData);
-    setUploading(false);
-    if (!result.success) {
-      toast.error(result.error ?? 'Upload failed');
-      return;
+    try {
+      const compressedFile = await compressImage(file);
+      const formData = new FormData();
+      formData.append('file', compressedFile);
+      const result = await uploadMenuItemImage(formData);
+
+      if (!result.success) {
+        toast.error(result.error ?? 'Upload failed');
+        return;
+      }
+      setForm((f) => ({ ...f, image: result.url ?? null }));
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Image upload failed');
+    } finally {
+      setUploading(false);
     }
-    setForm((f) => ({ ...f, image: result.url ?? null }));
   };
 
   const handleSave = async () => {

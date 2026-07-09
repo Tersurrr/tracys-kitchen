@@ -1,8 +1,22 @@
-import { createClient } from '@/lib/supabase/server';
+import { unstable_cache } from 'next/cache';
+import { createClient } from '@supabase/supabase-js';
 import type { Category } from '@/types';
 
-export async function getCategories(): Promise<Category[]> {
-  const supabase = await createClient();
+function createPublicClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    }
+  );
+}
+
+export const getCategories = unstable_cache(async (): Promise<Category[]> => {
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from('categories')
     .select('*')
@@ -13,4 +27,4 @@ export async function getCategories(): Promise<Category[]> {
     return [];
   }
   return data as Category[];
-}
+}, ['categories'], { revalidate: 300, tags: ['categories'] });
