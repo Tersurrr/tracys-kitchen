@@ -19,7 +19,7 @@ export default function FoodCard({ item }: { item: MenuItem }) {
     >
       <Link href={`/menu/${item.id}`}>
         <div className="relative aspect-[4/3] overflow-hidden bg-charcoal/40">
-          {showImage && (
+          {showImage && item.image && (
             <Image
               src={item.image}
               alt={item.name}
