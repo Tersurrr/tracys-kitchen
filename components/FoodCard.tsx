@@ -1,15 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { formatCurrency } from '@/utils/format';
 import type { MenuItem } from '@/types';
 
-const FALLBACK_IMAGE =
-  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800&auto=format&fit=crop';
-
 export default function FoodCard({ item }: { item: MenuItem }) {
+  const [imageError, setImageError] = useState(false);
+  const showImage = Boolean(item.image) && !imageError;
+
   return (
     <motion.div
       whileHover={{ y: -6 }}
@@ -17,14 +18,17 @@ export default function FoodCard({ item }: { item: MenuItem }) {
       className="group glass-card overflow-hidden"
     >
       <Link href={`/menu/${item.id}`}>
-        <div className="relative aspect-[4/3] overflow-hidden">
-          <Image
-            src={item.image || FALLBACK_IMAGE}
-            alt={item.name}
-            fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-          />
+        <div className="relative aspect-[4/3] overflow-hidden bg-charcoal/40">
+          {showImage && (
+            <Image
+              src={item.image}
+              alt={item.name}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              onError={() => setImageError(true)}
+            />
+          )}
           {!item.available && (
             <div className="absolute inset-0 flex items-center justify-center bg-charcoal/70">
               <span className="rounded-full border border-white/20 px-4 py-1 text-xs font-semibold uppercase tracking-wide">
