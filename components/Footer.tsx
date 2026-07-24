@@ -21,7 +21,7 @@ export default function Footer() {
           </div>
           <p className="mt-3 text-sm leading-relaxed text-white/60">
             Fresh homemade meals and snacks, prepared exclusively by pre-order.
-            Pickup or delivery — always made with care.
+            Pickup or delivery always made with care.
           </p>
         </div>
 
