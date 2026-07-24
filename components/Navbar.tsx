@@ -31,16 +31,16 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex min-w-0 items-center gap-3">
+        <Link href="/" className="flex min-w-0 items-center gap-4">
           <Image
             src="/tracys-kitchen-logo.jpg"
             alt="Tracy's Kitchen logo"
-            width={48}
-            height={48}
+            width={64}
+            height={64}
             priority
-            className="h-12 w-12 rounded-full bg-white object-contain ring-1 ring-white/10"
+            className="h-16 w-16 rounded-full bg-white object-contain ring-1 ring-white/10"
           />
-          <span className="font-display text-xl font-semibold tracking-tight">
+          <span className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
             Tracy&apos;s <span className="gold-text">Kitchen</span>
           </span>
         </Link>

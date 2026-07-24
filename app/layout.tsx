@@ -28,6 +28,11 @@ export const metadata: Metadata = {
   },
   description:
     "Tracy's Kitchen prepares fresh homemade meals and snacks exclusively by pre-order in Laurel, MD. Choose pickup or delivery and order in minutes.",
+  icons: {
+    icon: '/tracys-kitchen-logo.jpg',
+    shortcut: '/tracys-kitchen-logo.jpg',
+    apple: '/tracys-kitchen-logo.jpg',
+  },
   keywords: [
     "Tracy's Kitchen",
     'Laurel MD food',
