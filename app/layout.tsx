@@ -82,6 +82,11 @@ export default function RootLayout({
     },
     servesCuisine: ['African', 'Homemade'],
     priceRange: '$$',
+    sameAs: [
+      'https://www.facebook.com/jae.cutes.7',
+      'https://www.instagram.com/jae.cutes.7',
+      'https://youtube.com/@ayukjosephinee8484',
+    ],
   };
 
   return (
