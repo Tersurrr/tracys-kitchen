@@ -18,10 +18,13 @@ const inter = Inter({
   weight: ['400', '500', '600', '700', '800'],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tracyskitchen.netlify.app';
+const siteUrl = 'https://cookwithtracy.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: siteUrl,
+  },
   title: {
     default: "Tracy's Kitchen | Fresh Homemade Meals & Snacks, Made to Order",
     template: "%s | Tracy's Kitchen",
@@ -64,6 +67,7 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'Restaurant',
     name: "Tracy's Kitchen",
+    url: siteUrl,
     image: `${siteUrl}/og-image.jpg`,
     telephone: '+1-301-256-7848',
     email: 'Tracyayuk3@gmail.com',

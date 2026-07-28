@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getMenuItems } from '@/services/menu';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tracyskitchen.netlify.app';
+  const siteUrl = 'https://cookwithtracy.com';
 
   const items = await getMenuItems().catch(() => []);
 
