@@ -1,6 +1,37 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import {
+  Facebook,
+  Instagram,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Youtube,
+} from 'lucide-react';
+
+const socialLinks = [
+  {
+    name: 'Facebook',
+    href: 'https://www.facebook.com/jae.cutes.7',
+    icon: Facebook,
+  },
+  {
+    name: 'Instagram',
+    href: 'https://www.instagram.com/jae.cutes.7',
+    icon: Instagram,
+  },
+  {
+    name: 'YouTube',
+    href: 'https://youtube.com/@ayukjosephinee8484',
+    icon: Youtube,
+  },
+  {
+    name: 'WhatsApp',
+    href: 'https://wa.me/13012567848?text=Hello%20Tracy%27s%20Kitchen%2C%20I%27d%20like%20to%20place%20a%20preorder.',
+    icon: MessageCircle,
+  },
+] as const;
 
 export default function Footer() {
   return (
@@ -23,6 +54,24 @@ export default function Footer() {
             Fresh homemade meals and snacks, prepared exclusively by pre-order.
             Pickup or delivery always made with care.
           </p>
+          <div className="mt-5">
+            <p className="section-eyebrow mb-3">Follow Tracy&apos;s Kitchen</p>
+            <div className="flex flex-wrap gap-2">
+              {socialLinks.map(({ name, href, icon: Icon }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Follow Tracy's Kitchen on ${name}`}
+                  title={name}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white/70 transition-colors hover:border-gold/50 hover:bg-gold/10 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                >
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div>
