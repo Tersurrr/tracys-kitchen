@@ -26,7 +26,7 @@ body {
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold-gradient px-7 py-3.5 font-semibold text-charcoal shadow-gold transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold-gradient px-7 py-3.5 font-semibold text-charcoal shadow-gold-soft transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98];
   }
 
   .btn-outline {
@@ -48,7 +48,7 @@ body {
 }
 
 ::selection {
-  background-color: #f4b400;
+  background-color: #d09a20;
   color: #111111;
 }
 

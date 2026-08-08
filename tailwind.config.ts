@@ -9,9 +9,9 @@ const config: Config = {
     extend: {
       colors: {
         gold: {
-          DEFAULT: '#F4B400',
-          light: '#FFD34E',
-          dark: '#C89000',
+          DEFAULT: '#D09A20',
+          light: '#DFB451',
+          dark: '#A87412',
         },
         charcoal: {
           DEFAULT: '#111111',
@@ -24,12 +24,12 @@ const config: Config = {
         body: ['var(--font-body)', 'sans-serif'],
       },
       backgroundImage: {
-        'gold-gradient': 'linear-gradient(135deg, #F4B400 0%, #C89000 100%)',
+        'gold-gradient': 'linear-gradient(135deg, #D09A20 0%, #A87412 100%)',
         'dark-gradient': 'linear-gradient(180deg, #111111 0%, #1B1B1B 100%)',
-        'glass-gradient': 'linear-gradient(135deg, rgba(244,180,0,0.08) 0%, rgba(255,255,255,0.02) 100%)',
+        'glass-gradient': 'linear-gradient(135deg, rgba(208,154,32,0.06) 0%, rgba(255,255,255,0.02) 100%)',
       },
       boxShadow: {
-        gold: '0 8px 30px -8px rgba(244,180,0,0.45)',
+        'gold-soft': '0 6px 18px -10px rgba(208,154,32,0.18)',
         soft: '0 10px 40px -12px rgba(0,0,0,0.6)',
       },
       borderRadius: {
