@@ -6,8 +6,6 @@ import {
   ClipboardList,
   KeyRound,
 } from 'lucide-react';
-import { createClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
 import SignOutButton from '@/components/SignOutButton';
 import MobileAdminNav from '@/components/admin/MobileAdminNav';
 
@@ -19,19 +17,11 @@ const NAV = [
   { href: '/admin/passwords', label: 'Passwords', icon: KeyRound },
 ];
 
-export default async function AdminLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
-
-  if (error || !user) redirect('/admin/login');
-
   return (
     <div className="mx-auto flex min-h-[80vh] max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 md:flex-row md:gap-8 md:py-10">
       <MobileAdminNav />

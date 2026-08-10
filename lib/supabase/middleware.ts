@@ -14,6 +14,12 @@ function clearSupabaseAuthCookies(request: NextRequest, response: NextResponse) 
 }
 
 export async function updateSession(request: NextRequest) {
+  // The login page does not need a session lookup. Skipping the network call
+  // keeps the form responsive while sign-in is handled by the browser client.
+  if (request.nextUrl.pathname.startsWith('/admin/login')) {
+    return NextResponse.next({ request });
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -57,7 +63,6 @@ export async function updateSession(request: NextRequest) {
   // Protect all /admin routes except the login page itself.
   if (
     request.nextUrl.pathname.startsWith('/admin') &&
-    !request.nextUrl.pathname.startsWith('/admin/login') &&
     !user
   ) {
     const url = request.nextUrl.clone();

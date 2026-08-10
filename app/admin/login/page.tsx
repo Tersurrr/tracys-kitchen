@@ -17,15 +17,14 @@ export default function AdminLoginPage() {
     setLoading(true);
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
 
     if (error) {
+      setLoading(false);
       toast.error(error.message);
       return;
     }
     toast.success('Welcome back');
-    router.push('/admin');
-    router.refresh();
+    router.replace('/admin');
   };
 
   return (
