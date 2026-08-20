@@ -7,7 +7,7 @@ export default async function FeaturedMeals() {
   const items = await getFeaturedMenuItems(6);
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+    <section className="mx-auto max-w-7xl overflow-x-clip px-6 py-16 sm:py-20">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-3xl font-semibold md:text-4xl">
@@ -27,7 +27,7 @@ export default async function FeaturedMeals() {
           Menu items will appear here once added from the admin dashboard.
         </p>
       ) : (
-        <div className="grid grid-cols-1 items-stretch gap-4 min-[360px]:grid-cols-2 lg:grid-cols-3">
+        <div className="grid auto-rows-fr grid-cols-1 items-stretch gap-4 min-[360px]:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <div key={item.id} className="h-full">
               <FoodCard item={item} emphasizeInView />
