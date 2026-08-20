@@ -97,11 +97,11 @@ export default function Navbar() {
           : 'bg-charcoal'
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-1.5 px-3 py-3.5 sm:gap-3 sm:px-6 sm:py-4">
+      <nav className="mx-auto flex min-h-24 max-w-7xl items-center justify-between gap-1 px-2 py-5 min-[430px]:gap-2 min-[430px]:px-3 sm:min-h-28 sm:gap-3 sm:px-6 sm:py-5">
         <Link
           href="/"
           aria-label="Tracy's Kitchen home"
-          className="flex min-w-0 items-center gap-2 whitespace-nowrap sm:gap-3.5"
+          className="flex min-w-0 items-center gap-2 whitespace-nowrap sm:gap-4"
         >
           <Image
             src="/tracys-kitchen-logo.jpg"
@@ -109,9 +109,9 @@ export default function Navbar() {
             width={56}
             height={56}
             priority
-            className="h-10 w-10 shrink-0 rounded-full bg-[#fff] object-contain ring-1 ring-white/10 min-[375px]:h-12 min-[375px]:w-12 sm:h-14 sm:w-14"
+            className="h-11 w-11 shrink-0 rounded-full bg-[#fff] object-contain ring-1 ring-white/10 min-[375px]:h-14 min-[375px]:w-14 sm:h-16 sm:w-16"
           />
-          <span className="truncate font-display text-[1.08rem] font-semibold leading-none tracking-tight min-[375px]:text-[1.35rem] sm:text-[1.8rem]">
+          <span className="truncate font-display text-[1.08rem] font-semibold leading-none tracking-[-0.035em] min-[375px]:text-2xl sm:text-[2rem]">
             Tracy&apos;s <span className="gold-text">Kitchen</span>
           </span>
         </Link>
