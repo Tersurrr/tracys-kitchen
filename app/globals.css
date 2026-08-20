@@ -180,6 +180,25 @@ html[data-theme='light'] .dark-surface [class*='border-white'] {
   height: 0;
 }
 
+.product-name-scroll {
+  height: 1.75rem;
+  min-height: 1.75rem;
+  max-height: 1.75rem;
+  overflow-x: clip;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  line-height: 1.75rem;
+}
+
+.product-name-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 .homepage-content .text-xs {
   font-size: 0.8125rem;
   line-height: 1.25rem;

@@ -30,7 +30,7 @@ export default async function FeaturedMeals() {
         <div className="grid auto-rows-fr grid-cols-1 items-stretch gap-4 min-[360px]:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <div key={item.id} className="h-full">
-              <FoodCard item={item} emphasizeInView />
+              <FoodCard item={item} emphasizeInView scrollableName />
             </div>
           ))}
         </div>
