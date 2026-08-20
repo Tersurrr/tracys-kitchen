@@ -97,11 +97,11 @@ export default function Navbar() {
           : 'bg-charcoal'
       }`}
     >
-      <nav className="mx-auto flex min-h-24 max-w-7xl items-center justify-between gap-1 px-2 py-5 min-[430px]:gap-2 min-[430px]:px-3 sm:min-h-28 sm:gap-3 sm:px-6 sm:py-5">
+      <nav className="mx-auto flex min-h-24 w-full max-w-7xl items-center justify-between gap-0.5 px-1 py-5 min-[430px]:gap-2 min-[430px]:px-3 sm:min-h-28 sm:gap-3 sm:px-6 sm:py-5">
         <Link
           href="/"
           aria-label="Tracy's Kitchen home"
-          className="flex min-w-0 items-center gap-2 whitespace-nowrap sm:gap-4"
+          className="flex shrink-0 items-center gap-1 whitespace-nowrap min-[360px]:gap-2 sm:gap-4"
         >
           <Image
             src="/tracys-kitchen-logo.jpg"
@@ -111,7 +111,7 @@ export default function Navbar() {
             priority
             className="h-11 w-11 shrink-0 rounded-full bg-[#fff] object-contain ring-1 ring-white/10 min-[375px]:h-14 min-[375px]:w-14 sm:h-16 sm:w-16"
           />
-          <span className="truncate font-display text-[1.08rem] font-semibold leading-none tracking-[-0.035em] min-[375px]:text-2xl sm:text-[2rem]">
+          <span className="font-display text-[clamp(1.3rem,6.6vw,1.625rem)] font-semibold leading-none tracking-[-0.04em] sm:text-[2rem]">
             Tracy&apos;s <span className="gold-text">Kitchen</span>
           </span>
         </Link>
@@ -228,7 +228,7 @@ export default function Navbar() {
         )}
 
       <div
-        className="announcement-marquee dark-surface overflow-hidden border-y border-gold/15 bg-black/75 py-2"
+        className="announcement-marquee dark-surface w-full max-w-full overflow-hidden border-y border-gold/15 bg-black/75 py-2"
         role="region"
         aria-label="Special orders and social media contacts"
       >

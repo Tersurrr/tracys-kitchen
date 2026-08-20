@@ -51,7 +51,7 @@ export default function MenuBrowser({
         </div>
       </div>
 
-      <div className="horizontal-scroller mb-8 flex snap-x gap-2 overflow-x-auto pb-2">
+      <div className="horizontal-scroller mb-8 flex min-w-0 max-w-full snap-x gap-2 overflow-x-auto pb-2">
         {tabs.map((tab) => (
           <button
             key={tab}

@@ -59,7 +59,7 @@ export default function FoodCard({
           <h3 className={`font-display font-semibold ${compact ? 'line-clamp-2 text-lg leading-snug' : 'text-lg'}`}>
             {item.name}
           </h3>
-          <p className={`mt-1.5 text-white/65 ${compact ? 'line-clamp-2 text-sm leading-relaxed' : 'line-clamp-2 text-sm'}`}>
+          <p className="product-description-scroll mt-1.5 text-sm text-white/65">
             {item.description}
           </p>
         </div>
