@@ -5,7 +5,7 @@ import CategorySlider from '@/components/CategorySlider';
 export default async function Categories() {
   const [categories, menuItems] = await Promise.all([getCategories(), getMenuItems()]);
   const visibleCategories = categories.filter(
-    (category) => !/soup\s*\/?\s*stew\s*bowls?/i.test(category.name)
+    (category) => !/\b(?:soups?|stews?)\b/i.test(category.name)
   );
 
   const imageByCategory = Object.fromEntries(
