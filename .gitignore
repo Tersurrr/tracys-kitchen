@@ -3,3 +3,6 @@ node_modules/
 .env
 .env.local
 env.download
+
+# Local Netlify folder
+.netlify

@@ -26,10 +26,10 @@ export default function MenuPage() {
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mb-8 text-center sm:mb-10">
         <p className="section-eyebrow mb-3">Our Menu</p>
-        <h1 className="font-display text-3xl font-semibold sm:text-4xl md:text-5xl">
+        <h1 className="font-display text-4xl font-semibold sm:text-5xl md:text-6xl">
           Fresh, Made-to-Order Favorites
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-white/60">
+        <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
           Every dish is prepared after you order. Search, filter by category,
           and add your favorites to your preorder.
         </p>

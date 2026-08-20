@@ -21,17 +21,19 @@ export default async function HomePage() {
   return (
     <>
       <Hero backgroundImage={heroFood?.image} backgroundAlt={heroFood?.name} />
-      <Categories />
-      <Suspense fallback={<div className="mx-auto max-w-7xl px-6 py-24"><MenuGridSkeleton /></div>}>
-        <FeaturedMeals />
-      </Suspense>
-      <HowItWorks />
-      <WhyChooseUs />
-      <PolicyCard />
-      <Testimonials />
-      <MapSection />
-      <ContactSection />
-      <Footer />
+      <div className="homepage-content">
+        <Categories />
+        <Suspense fallback={<div className="mx-auto max-w-7xl px-6 py-24"><MenuGridSkeleton /></div>}>
+          <FeaturedMeals />
+        </Suspense>
+        <HowItWorks />
+        <WhyChooseUs />
+        <PolicyCard />
+        <Testimonials />
+        <MapSection />
+        <ContactSection />
+        <Footer />
+      </div>
     </>
   );
 }

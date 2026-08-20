@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Minus, Plus, ShoppingBag } from 'lucide-react';
+import { ArrowLeft, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 import { formatCurrency } from '@/utils/format';
 import type { MenuItem } from '@/types';
@@ -16,20 +17,45 @@ export default function FoodDetailClient({ item }: { item: MenuItem }) {
   const [request, setRequest] = useState('');
   const { addToCart } = useCart();
   const router = useRouter();
+  const returnTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    router.prefetch('/menu');
+    return () => {
+      if (returnTimerRef.current !== null) {
+        window.clearTimeout(returnTimerRef.current);
+      }
+    };
+  }, [router]);
 
   const handleAdd = () => {
+    if (returnTimerRef.current !== null) {
+      window.clearTimeout(returnTimerRef.current);
+    }
     addToCart(item, quantity, request || undefined);
     setQuantity(1);
     setRequest('');
+    returnTimerRef.current = window.setTimeout(() => router.push('/menu'), 1800);
   };
 
   const handleAddAndCheckout = () => {
+    if (returnTimerRef.current !== null) {
+      window.clearTimeout(returnTimerRef.current);
+    }
     addToCart(item, quantity, request || undefined);
     router.push('/checkout');
   };
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16">
+      <Link
+        href="/menu"
+        className="mb-7 inline-flex items-center gap-2 text-base font-semibold text-gold transition-colors hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      >
+        <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+        Back to Menu
+      </Link>
+
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <div className="relative aspect-square max-h-[560px] overflow-hidden rounded-xl2 bg-white/5">
           <Image
@@ -52,7 +78,7 @@ export default function FoodDetailClient({ item }: { item: MenuItem }) {
           <p className="mb-6 text-2xl font-semibold text-gold">
             {formatCurrency(item.price)}
           </p>
-          <p className="mb-8 leading-relaxed text-white/70">
+          <p className="mb-8 text-lg leading-relaxed text-white/75">
             {item.description}
           </p>
 
@@ -63,7 +89,7 @@ export default function FoodDetailClient({ item }: { item: MenuItem }) {
           ) : (
             <>
               <div className="mb-6">
-                <label className="mb-2 block text-sm font-medium text-white/80">
+                <label className="mb-2 block text-base font-medium text-white/80">
                   Quantity
                 </label>
                 <div className="flex w-fit items-center gap-4 rounded-full border border-white/15 px-4 py-2">
@@ -88,7 +114,7 @@ export default function FoodDetailClient({ item }: { item: MenuItem }) {
               <div className="mb-8">
                 <label
                   htmlFor="special-request"
-                  className="mb-2 block text-sm font-medium text-white/80"
+                  className="mb-2 block text-base font-medium text-white/80"
                 >
                   Special Request
                 </label>
@@ -98,7 +124,7 @@ export default function FoodDetailClient({ item }: { item: MenuItem }) {
                   onChange={(e) => setRequest(e.target.value)}
                   placeholder="e.g. Less pepper, no onions..."
                   rows={3}
-                  className="w-full rounded-xl border border-white/10 bg-white/5 p-4 text-sm placeholder:text-white/40 focus:border-gold focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/5 p-4 text-base placeholder:text-white/40 focus:border-gold focus:outline-none"
                 />
               </div>
 

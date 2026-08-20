@@ -4,9 +4,12 @@ import CategorySlider from '@/components/CategorySlider';
 
 export default async function Categories() {
   const [categories, menuItems] = await Promise.all([getCategories(), getMenuItems()]);
+  const visibleCategories = categories.filter(
+    (category) => !/soup\s*\/?\s*stew\s*bowls?/i.test(category.name)
+  );
 
   const imageByCategory = Object.fromEntries(
-    categories.map((category) => [
+    visibleCategories.map((category) => [
       category.id,
       menuItems.find((item) => item.category_id === category.id && item.image)?.image ?? null,
     ])
@@ -19,12 +22,12 @@ export default async function Categories() {
           Shop by Category
         </h2>
 
-        {categories.length === 0 ? (
+        {visibleCategories.length === 0 ? (
           <p className="max-w-2xl text-white/50">
             Categories will appear here once they are added from the admin dashboard.
           </p>
         ) : (
-          <CategorySlider categories={categories} imageByCategory={imageByCategory} />
+          <CategorySlider categories={visibleCategories} imageByCategory={imageByCategory} />
         )}
       </div>
     </section>

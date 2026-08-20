@@ -65,11 +65,29 @@ html[data-theme='light'] .text-white {
 }
 
 html[data-theme='light'] [class*='text-white/'] {
-  color: rgba(23, 19, 13, 0.68) !important;
+  color: rgba(23, 19, 13, 0.78) !important;
 }
 
 html[data-theme='light'] [class*='border-white'] {
   border-color: rgba(23, 19, 13, 0.14) !important;
+}
+
+html[data-theme='light'] input,
+html[data-theme='light'] textarea,
+html[data-theme='light'] select {
+  color: #17130d;
+}
+
+html[data-theme='light'] input::placeholder,
+html[data-theme='light'] textarea::placeholder {
+  color: rgba(23, 19, 13, 0.58) !important;
+  opacity: 1;
+}
+
+html[data-theme='light'] .menu-search {
+  border-color: rgba(23, 19, 13, 0.22) !important;
+  background-color: rgba(255, 255, 255, 0.62) !important;
+  color: #17130d !important;
 }
 
 html[data-theme='light'] .dark-surface {
@@ -129,6 +147,21 @@ html[data-theme='light'] .dark-surface [class*='border-white'] {
 .horizontal-scroller::-webkit-scrollbar-thumb {
   border-radius: 999px;
   background: rgba(208, 154, 32, 0.45);
+}
+
+.homepage-content .text-xs {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+}
+
+.homepage-content .text-sm {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.homepage-content .text-base {
+  font-size: 1.0625rem;
+  line-height: 1.65rem;
 }
 
 @layer components {

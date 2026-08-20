@@ -4,7 +4,7 @@ import FoodCard from './FoodCard';
 import { getFeaturedMenuItems } from '@/services/menu';
 
 export default async function FeaturedMeals() {
-  const items = await getFeaturedMenuItems(3);
+  const items = await getFeaturedMenuItems(6);
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">

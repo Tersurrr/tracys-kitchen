@@ -39,7 +39,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
         return [...prev, { menuItem: item, quantity, specialRequest }];
       });
-      toast.success(`Added ${item.name} to your order`);
+      toast.success(`Added ${item.name} to your order`, { duration: 1800 });
     },
     []
   );

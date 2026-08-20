@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   ArrowUpRight,
   CakeSlice,
@@ -73,6 +75,11 @@ export default function CategorySlider({
   imageByCategory: Record<string, string | null>;
 }) {
   const reduceMotion = useReducedMotion();
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch('/menu');
+  }, [router]);
 
   return (
     <div
@@ -82,6 +89,7 @@ export default function CategorySlider({
       {categories.map((category, index) => {
         const CategoryIcon = getCategoryIcon(category.name);
         const categoryImage = imageByCategory[category.id] ?? getFallbackArtwork(category.name);
+        const categoryHref = `/menu?category=${encodeURIComponent(category.name)}`;
 
         return (
           <motion.div
@@ -93,7 +101,11 @@ export default function CategorySlider({
             transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : index * 0.055 }}
           >
             <Link
-              href={`/menu?category=${encodeURIComponent(category.name)}`}
+              href={categoryHref}
+              prefetch
+              onPointerEnter={() => router.prefetch(categoryHref)}
+              onFocus={() => router.prefetch(categoryHref)}
+              onTouchStart={() => router.prefetch(categoryHref)}
               aria-label={`Explore ${category.name}`}
               className="group block h-full overflow-hidden rounded-xl border border-white/15 bg-white/[0.035] text-left transition duration-300 hover:-translate-y-0.5 hover:border-gold/50 hover:bg-gold/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >

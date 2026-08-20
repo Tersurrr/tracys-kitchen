@@ -18,7 +18,6 @@ export default function MenuBrowser({
 
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [availableOnly, setAvailableOnly] = useState(false);
 
   const tabs = ['All', ...categories.map((c) => c.name)];
 
@@ -32,36 +31,24 @@ export default function MenuBrowser({
       const matchesCategory =
         activeCategory === 'All' || item.category?.name === activeCategory;
 
-      const matchesAvailability = !availableOnly || item.available;
-
-      return matchesQuery && matchesCategory && matchesAvailability;
+      return matchesQuery && matchesCategory;
     });
-  }, [items, query, activeCategory, availableOnly]);
+  }, [items, query, activeCategory]);
 
   return (
     <div>
-      <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="relative w-full md:max-w-sm">
-          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+      <div className="mb-8">
+        <div className="relative w-full md:max-w-md">
+          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-white/55" />
           <input
             type="text"
             aria-label="Search meals or snacks"
             placeholder="Search meals or snacks..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-full border border-white/10 bg-white/5 py-3 pl-11 pr-4 text-sm placeholder:text-white/40 focus:border-gold focus:outline-none"
+            className="menu-search w-full rounded-full border border-white/15 bg-white/5 py-3.5 pl-12 pr-5 text-base font-medium placeholder:text-white/50 focus:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/30"
           />
         </div>
-
-        <label className="flex items-center gap-2 text-sm text-white/70">
-          <input
-            type="checkbox"
-            checked={availableOnly}
-            onChange={(e) => setAvailableOnly(e.target.checked)}
-            className="h-4 w-4 rounded border-white/20 accent-gold"
-          />
-          Available only
-        </label>
       </div>
 
       <div className="horizontal-scroller mb-8 flex snap-x gap-2 overflow-x-auto pb-2">
@@ -70,7 +57,7 @@ export default function MenuBrowser({
             key={tab}
             type="button"
             onClick={() => setActiveCategory(tab)}
-            className={`shrink-0 snap-start rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+            className={`shrink-0 snap-start rounded-full border px-5 py-2.5 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
               activeCategory === tab
                 ? 'border-gold bg-gold text-charcoal'
                 : 'border-white/15 text-white/70 hover:border-gold/50 hover:text-gold'
@@ -82,11 +69,11 @@ export default function MenuBrowser({
       </div>
 
       {filtered.length === 0 ? (
-        <p className="py-16 text-center text-white/50">
+        <p className="py-16 text-center text-base text-white/60 sm:text-lg">
           No items match your search. Try a different keyword or category.
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-2 min-[330px]:grid-cols-2 min-[375px]:grid-cols-3 sm:gap-4 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 min-[340px]:grid-cols-2 md:grid-cols-3 md:gap-5">
           {filtered.map((item) => (
             <FoodCard key={item.id} item={item} compact />
           ))}
