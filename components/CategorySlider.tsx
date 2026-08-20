@@ -83,7 +83,7 @@ export default function CategorySlider({
 
   return (
     <div
-      className="horizontal-scroller flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 pr-10 sm:gap-4"
+      className="horizontal-scroller flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 pr-10 sm:gap-5"
       aria-label="Food categories"
     >
       {categories.map((category, index) => {
@@ -94,7 +94,7 @@ export default function CategorySlider({
         return (
           <motion.div
             key={category.id}
-            className="w-[9.25rem] shrink-0 snap-start sm:w-[10.5rem] lg:w-[11.5rem]"
+            className="w-[10.25rem] shrink-0 snap-start sm:w-[11.5rem] lg:w-[12.5rem]"
             initial={reduceMotion ? false : { opacity: 0, x: 36 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.25 }}
@@ -115,7 +115,7 @@ export default function CategorySlider({
                     src={categoryImage}
                     alt={`Representative ${category.name} dish`}
                     fill
-                    sizes="(max-width: 640px) 148px, (max-width: 1024px) 168px, 184px"
+                    sizes="(max-width: 640px) 164px, (max-width: 1024px) 184px, 200px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <span className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
@@ -125,10 +125,10 @@ export default function CategorySlider({
                 </span>
               </span>
               <span className="block px-3 pb-3 pt-6">
-                <span className="block font-display text-base font-semibold leading-tight text-white transition-colors group-hover:text-gold">
+                <span className="block font-display text-lg font-semibold leading-tight text-white transition-colors group-hover:text-gold">
                   {category.name}
                 </span>
-                <span className="mt-1.5 flex items-center gap-1 text-xs font-semibold text-gold">
+                <span className="mt-2 flex items-center gap-1 text-sm font-semibold text-gold">
                   Explore <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </span>
               </span>

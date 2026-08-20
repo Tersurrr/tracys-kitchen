@@ -247,7 +247,7 @@ export default function CheckoutClient() {
           </button>
 
           <p className="text-center text-xs text-white/40">
-            No online payment — we&apos;ll confirm your deposit over WhatsApp.
+            No online payment. We&apos;ll confirm your deposit over WhatsApp.
           </p>
         </form>
       </div>

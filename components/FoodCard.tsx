@@ -3,21 +3,32 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { formatCurrency } from '@/utils/format';
 import type { MenuItem } from '@/types';
 
-export default function FoodCard({ item, compact = false }: { item: MenuItem; compact?: boolean }) {
+export default function FoodCard({
+  item,
+  compact = false,
+  emphasizeInView = false,
+}: {
+  item: MenuItem;
+  compact?: boolean;
+  emphasizeInView?: boolean;
+}) {
   const [imageError, setImageError] = useState(false);
+  const reduceMotion = useReducedMotion();
   const showImage = Boolean(item.image) && !imageError;
 
   return (
     <motion.div
       whileHover={{ y: compact ? -2 : -6 }}
+      whileInView={emphasizeInView && !reduceMotion ? { scale: 1.06 } : undefined}
+      viewport={{ once: false, amount: 0.78 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="group glass-card overflow-hidden"
+      className="group glass-card h-full overflow-hidden"
     >
-      <Link href={`/menu/${item.id}`} className="block h-full">
+      <Link href={`/menu/${item.id}`} className="flex h-full flex-col">
         <div className="dark-surface relative aspect-[4/3] overflow-hidden bg-charcoal/40">
           {showImage && item.image && (
             <Image
@@ -44,7 +55,7 @@ export default function FoodCard({ item, compact = false }: { item: MenuItem; co
             {formatCurrency(item.price)}
           </div>
         </div>
-        <div className={compact ? 'p-3.5 sm:p-4' : 'p-5'}>
+        <div className={compact ? 'flex flex-1 flex-col p-3.5 sm:p-4' : 'flex flex-1 flex-col p-5'}>
           <h3 className={`font-display font-semibold ${compact ? 'line-clamp-2 text-base leading-snug sm:text-lg' : 'text-lg'}`}>
             {item.name}
           </h3>

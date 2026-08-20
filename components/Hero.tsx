@@ -67,7 +67,7 @@ export default function Hero({ backgroundImage, backgroundAlt }: HeroProps) {
           initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: reduceMotion ? 0 : 0.16 }}
-          className="mt-7 max-w-2xl border-l-2 border-gold/65 pl-4 text-[0.98rem] leading-7 text-white/85 sm:pl-5 sm:text-lg sm:leading-8"
+          className="mt-7 max-w-2xl text-[0.98rem] leading-7 text-white/85 sm:text-lg sm:leading-8"
         >
           We prepare fresh meals and snacks exclusively by pre-order. Choose pickup or delivery,
           place your order in minutes, and let us take care of the rest.
