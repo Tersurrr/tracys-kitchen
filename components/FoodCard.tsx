@@ -56,10 +56,10 @@ export default function FoodCard({
           </div>
         </div>
         <div className={compact ? 'flex flex-1 flex-col p-3.5 sm:p-4' : 'flex flex-1 flex-col p-5'}>
-          <h3 className={`font-display font-semibold ${compact ? 'line-clamp-2 text-base leading-snug sm:text-lg' : 'text-lg'}`}>
+          <h3 className={`font-display font-semibold ${compact ? 'line-clamp-2 text-lg leading-snug' : 'text-lg'}`}>
             {item.name}
           </h3>
-          <p className={`mt-1.5 text-white/65 ${compact ? 'line-clamp-2 text-sm leading-relaxed sm:text-base' : 'line-clamp-2 text-sm'}`}>
+          <p className={`mt-1.5 text-white/65 ${compact ? 'line-clamp-2 text-sm leading-relaxed' : 'line-clamp-2 text-sm'}`}>
             {item.description}
           </p>
         </div>
