@@ -94,7 +94,7 @@ export default function CategorySlider({
         return (
           <motion.div
             key={category.id}
-            className="w-[calc((100%-3rem)/2)] shrink-0 snap-start sm:w-[11.5rem] lg:w-[12.5rem]"
+            className="w-[36vw] min-w-28 max-w-[9.25rem] shrink-0 snap-start sm:w-[11.5rem] sm:max-w-none lg:w-[12.5rem]"
             initial={reduceMotion ? false : { opacity: 0, x: 36 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.25 }}
@@ -115,7 +115,7 @@ export default function CategorySlider({
                     src={categoryImage}
                     alt={`Representative ${category.name} dish`}
                     fill
-                    sizes="(max-width: 640px) 42vw, (max-width: 1024px) 184px, 200px"
+                    sizes="(max-width: 640px) 36vw, (max-width: 1024px) 184px, 200px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <span className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />

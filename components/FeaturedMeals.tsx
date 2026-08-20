@@ -4,7 +4,7 @@ import FoodCard from './FoodCard';
 import { getFeaturedMenuItems } from '@/services/menu';
 
 export default async function FeaturedMeals() {
-  const items = await getFeaturedMenuItems(6);
+  const items = await getFeaturedMenuItems(4);
 
   return (
     <section className="mx-auto max-w-7xl overflow-x-clip px-6 py-16 sm:py-20">
@@ -27,10 +27,10 @@ export default async function FeaturedMeals() {
           Menu items will appear here once added from the admin dashboard.
         </p>
       ) : (
-        <div className="horizontal-scroller grid grid-flow-col grid-rows-2 auto-cols-[82%] items-stretch gap-4 overflow-x-auto pb-4 pr-8 sm:grid-flow-row sm:grid-rows-none sm:auto-cols-auto sm:auto-rows-fr sm:grid-cols-2 sm:overflow-visible sm:pb-0 sm:pr-0 lg:grid-cols-3">
+        <div className="grid auto-rows-fr grid-cols-2 items-stretch gap-4 md:grid-cols-4">
           {items.map((item) => (
             <div key={item.id} className="h-full">
-              <FoodCard item={item} emphasizeInView eagerImage />
+              <FoodCard item={item} eagerImage />
             </div>
           ))}
         </div>
