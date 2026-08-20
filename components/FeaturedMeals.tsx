@@ -27,10 +27,10 @@ export default async function FeaturedMeals() {
           Menu items will appear here once added from the admin dashboard.
         </p>
       ) : (
-        <div className="grid auto-rows-fr grid-cols-1 items-stretch gap-4 min-[360px]:grid-cols-2 lg:grid-cols-3">
+        <div className="horizontal-scroller grid grid-flow-col grid-rows-2 auto-cols-[82%] items-stretch gap-4 overflow-x-auto pb-4 pr-8 sm:grid-flow-row sm:grid-rows-none sm:auto-cols-auto sm:auto-rows-fr sm:grid-cols-2 sm:overflow-visible sm:pb-0 sm:pr-0 lg:grid-cols-3">
           {items.map((item) => (
             <div key={item.id} className="h-full">
-              <FoodCard item={item} emphasizeInView scrollableName />
+              <FoodCard item={item} emphasizeInView eagerImage />
             </div>
           ))}
         </div>

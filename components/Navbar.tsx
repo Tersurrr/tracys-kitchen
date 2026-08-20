@@ -111,7 +111,7 @@ export default function Navbar() {
             priority
             className="h-11 w-11 shrink-0 rounded-full bg-[#fff] object-contain ring-1 ring-white/10 min-[375px]:h-14 min-[375px]:w-14 sm:h-16 sm:w-16"
           />
-          <span className="font-display text-[clamp(1.3rem,6.6vw,1.625rem)] font-semibold leading-none tracking-[-0.04em] sm:text-[2rem]">
+          <span className="font-display text-[clamp(1.35rem,calc(6.6vw+0.05rem),1.675rem)] font-semibold leading-none tracking-[-0.04em] sm:text-[2.05rem]">
             Tracy&apos;s <span className="gold-text">Kitchen</span>
           </span>
         </Link>
@@ -213,9 +213,10 @@ export default function Navbar() {
                 </li>
               </ul>
 
-              <Link
-                href="/menu"
-                onClick={() => setOpen(false)}
+          <Link
+            href="/menu"
+            prefetch
+            onClick={() => setOpen(false)}
                 className="btn-primary mt-auto w-full text-base"
               >
                 Order Now

@@ -11,12 +11,12 @@ export default function FoodCard({
   item,
   compact = false,
   emphasizeInView = false,
-  scrollableName = false,
+  eagerImage = false,
 }: {
   item: MenuItem;
   compact?: boolean;
   emphasizeInView?: boolean;
-  scrollableName?: boolean;
+  eagerImage?: boolean;
 }) {
   const [imageError, setImageError] = useState(false);
   const reduceMotion = useReducedMotion();
@@ -42,6 +42,7 @@ export default function FoodCard({
                   ? '(max-width: 339px) 100vw, (max-width: 767px) 50vw, 30vw'
                   : '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw'
               }
+              loading={eagerImage ? 'eager' : 'lazy'}
               className="object-cover transition-transform duration-500 group-hover:scale-110"
               onError={() => setImageError(true)}
             />
@@ -58,18 +59,10 @@ export default function FoodCard({
           </div>
         </div>
         <div className={compact ? 'flex flex-1 flex-col p-3.5 sm:p-4' : 'flex flex-1 flex-col p-5'}>
-          <h3
-            className={`font-display font-semibold ${
-              scrollableName
-                ? 'product-name-scroll text-lg'
-                : compact
-                  ? 'line-clamp-2 text-lg leading-snug'
-                  : 'text-lg'
-            }`}
-          >
+          <h3 className={`font-display font-semibold ${compact ? 'line-clamp-2 text-lg leading-snug' : 'text-lg'}`}>
             {item.name}
           </h3>
-          <p className="product-description-scroll mt-1.5 text-sm text-white/65">
+          <p className={`product-description mt-1.5 line-clamp-2 text-white/65 ${compact ? 'leading-relaxed' : ''}`}>
             {item.description}
           </p>
         </div>
