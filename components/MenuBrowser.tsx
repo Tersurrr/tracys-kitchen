@@ -45,6 +45,7 @@ export default function MenuBrowser({
           <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
           <input
             type="text"
+            aria-label="Search meals or snacks"
             placeholder="Search meals or snacks..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -63,12 +64,13 @@ export default function MenuBrowser({
         </label>
       </div>
 
-      <div className="mb-10 flex flex-wrap gap-2">
+      <div className="horizontal-scroller mb-8 flex snap-x gap-2 overflow-x-auto pb-2">
         {tabs.map((tab) => (
           <button
             key={tab}
+            type="button"
             onClick={() => setActiveCategory(tab)}
-            className={`rounded-full border px-5 py-2 text-sm font-medium transition-colors ${
+            className={`shrink-0 snap-start rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
               activeCategory === tab
                 ? 'border-gold bg-gold text-charcoal'
                 : 'border-white/15 text-white/70 hover:border-gold/50 hover:text-gold'
@@ -84,9 +86,9 @@ export default function MenuBrowser({
           No items match your search. Try a different keyword or category.
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2 min-[330px]:grid-cols-2 min-[375px]:grid-cols-3 sm:gap-4 lg:grid-cols-3">
           {filtered.map((item) => (
-            <FoodCard key={item.id} item={item} />
+            <FoodCard key={item.id} item={item} compact />
           ))}
         </div>
       )}

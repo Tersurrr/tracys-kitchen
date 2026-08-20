@@ -15,10 +15,28 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const item = await getMenuItemById(id);
-  if (!item) return { title: 'Item Not Found' };
+  if (!item) return { title: 'Item Not Found', robots: { index: false, follow: false } };
+
+  const canonical = `/menu/${id}`;
+  const images = item.image ? [{ url: item.image, alt: item.name }] : [];
+
   return {
     title: item.name,
     description: item.description,
+    alternates: { canonical },
+    openGraph: {
+      title: item.name,
+      description: item.description,
+      url: canonical,
+      type: 'website',
+      images,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: item.name,
+      description: item.description,
+      images,
+    },
   };
 }
 

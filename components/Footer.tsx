@@ -36,27 +36,27 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-charcoal">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-3">
-        <div>
-          <div className="flex items-center gap-3">
+      <div className="mx-auto grid max-w-5xl gap-9 px-6 py-12 text-center md:grid-cols-3 md:gap-8 md:py-14">
+        <div className="flex flex-col items-center">
+          <div className="flex items-center justify-center gap-3">
             <Image
               src="/tracys-kitchen-logo.jpg"
               alt="Tracy's Kitchen logo"
               width={48}
               height={48}
-              className="h-12 w-12 rounded-full bg-white object-contain ring-1 ring-white/10"
+              className="h-12 w-12 rounded-full bg-[#fff] object-contain ring-1 ring-white/10"
             />
             <h3 className="font-display text-lg font-semibold">
               Tracy&apos;s <span className="gold-text">Kitchen</span>
             </h3>
           </div>
-          <p className="mt-3 text-sm leading-relaxed text-white/60">
+          <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-white/60">
             Fresh homemade meals and snacks, prepared exclusively by pre-order.
             Pickup or delivery always made with care.
           </p>
           <div className="mt-5">
             <p className="section-eyebrow mb-3">Follow Tracy&apos;s Kitchen</p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {socialLinks.map(({ name, href, icon: Icon }) => (
                 <a
                   key={name}
@@ -74,7 +74,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div>
+        <div className="text-center">
           <h4 className="section-eyebrow mb-4">Quick Links</h4>
           <ul className="space-y-2 text-sm text-white/70">
             <li><Link href="/menu" className="hover:text-gold">Menu</Link></li>
@@ -84,17 +84,18 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="text-center">
           <h4 className="section-eyebrow mb-4">Contact</h4>
           <ul className="space-y-3 text-sm text-white/70">
-            <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-gold" /> +1 (301) 256-7848
+            <li className="flex items-center justify-center gap-2">
+              <Phone className="h-4 w-4 shrink-0 text-gold" /> +1 (301) 256-7848
             </li>
-            <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-gold" /> Tracyayuk3@gmail.com
+            <li className="flex items-center justify-center gap-2">
+              <Mail className="h-4 w-4 shrink-0 text-gold" /> Tracyayuk3@gmail.com
             </li>
-            <li className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-gold" /> 3461 Andrew Court, Laurel MD 20724
+            <li className="flex items-start justify-center gap-2">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+              <span>3461 Andrew Court, Laurel MD 20724</span>
             </li>
           </ul>
         </div>

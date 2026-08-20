@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Menu',
   description:
     "Browse Tracy's Kitchen's full menu of homemade rice dishes, soups, snacks, drinks, and desserts. Order by pickup or delivery.",
+  alternates: { canonical: '/menu' },
 };
 
 async function MenuContent() {
@@ -22,10 +23,10 @@ async function MenuContent() {
 
 export default function MenuPage() {
   return (
-    <div className="mx-auto max-w-7xl px-6 py-16">
-      <div className="mb-10 text-center">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+      <div className="mb-8 text-center sm:mb-10">
         <p className="section-eyebrow mb-3">Our Menu</p>
-        <h1 className="font-display text-4xl font-semibold md:text-5xl">
+        <h1 className="font-display text-3xl font-semibold sm:text-4xl md:text-5xl">
           Fresh, Made-to-Order Favorites
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-white/60">

@@ -1,14 +1,21 @@
-import Link from 'next/link';
 import { getCategories } from '@/services/categories';
+import { getMenuItems } from '@/services/menu';
+import CategorySlider from '@/components/CategorySlider';
 
 export default async function Categories() {
-  const categories = await getCategories();
+  const [categories, menuItems] = await Promise.all([getCategories(), getMenuItems()]);
+
+  const imageByCategory = Object.fromEntries(
+    categories.map((category) => [
+      category.id,
+      menuItems.find((item) => item.category_id === category.id && item.image)?.image ?? null,
+    ])
+  );
 
   return (
-    <section className="bg-charcoal-light/40 py-24">
+    <section className="bg-charcoal-light/40 py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-6">
-        <p className="section-eyebrow mb-3">Explore</p>
-        <h2 className="mb-12 font-display text-3xl font-semibold md:text-4xl">
+        <h2 className="mb-7 font-display text-3xl font-semibold md:mb-8 md:text-4xl">
           Shop by Category
         </h2>
 
@@ -17,19 +24,7 @@ export default async function Categories() {
             Categories will appear here once they are added from the admin dashboard.
           </p>
         ) : (
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-          {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`/menu?category=${encodeURIComponent(category.name)}`}
-              className="group flex min-h-32 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] p-5 text-center transition-colors hover:border-gold/60 hover:bg-gold/10"
-            >
-              <span className="font-display text-lg font-semibold text-white transition-colors group-hover:text-gold">
-                {category.name}
-              </span>
-            </Link>
-          ))}
-          </div>
+          <CategorySlider categories={categories} imageByCategory={imageByCategory} />
         )}
       </div>
     </section>

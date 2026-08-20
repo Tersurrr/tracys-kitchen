@@ -1,4 +1,7 @@
-import { ChefHat, Clock, Truck, HeartHandshake } from 'lucide-react';
+'use client';
+
+import { ChefHat, Clock, HeartHandshake, Truck } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const FEATURES = [
   {
@@ -24,23 +27,52 @@ const FEATURES = [
 ];
 
 export default function WhyChooseUs() {
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-24">
-      <p className="section-eyebrow mb-3">Why Tracy&apos;s Kitchen</p>
-      <h2 className="mb-12 font-display text-3xl font-semibold md:text-4xl">
-        Why Choose Us
-      </h2>
+  const reduceMotion = useReducedMotion();
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {FEATURES.map((f) => (
-          <div key={f.title} className="glass-card p-7">
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-gold-gradient">
-              <f.icon className="h-6 w-6 text-charcoal" />
-            </div>
-            <h3 className="mb-2 font-display text-lg font-semibold">{f.title}</h3>
-            <p className="text-sm leading-relaxed text-white/60">{f.desc}</p>
-          </div>
-        ))}
+  return (
+    <section className="py-16 sm:py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <p className="section-eyebrow mb-3">Why Tracy&apos;s Kitchen</p>
+        <h2 className="mb-8 font-display text-3xl font-semibold md:text-4xl">
+          Why Choose Us
+        </h2>
+
+        <div className="relative max-w-4xl space-y-3">
+          <div
+            className="absolute bottom-6 left-[1.45rem] top-6 w-px bg-gold/20"
+            aria-hidden="true"
+          />
+          {FEATURES.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              className="glass-card relative flex items-center gap-4 px-4 py-3.5 sm:px-5"
+              initial={reduceMotion ? false : { opacity: 0, x: 34 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.38,
+                delay: reduceMotion ? 0 : index * 0.055,
+              }}
+            >
+              <div className="z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/45 bg-charcoal text-gold">
+                <feature.icon className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <div className="min-w-0 flex-1 sm:flex sm:items-center sm:gap-5">
+                <div className="flex min-w-0 items-baseline gap-3 sm:w-72 sm:shrink-0">
+                  <span className="font-display text-sm font-semibold text-gold">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="font-display text-base font-semibold sm:text-lg">
+                    {feature.title}
+                  </h3>
+                </div>
+                <p className="mt-1 text-sm leading-relaxed text-white/60 sm:mt-0">
+                  {feature.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

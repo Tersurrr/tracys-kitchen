@@ -83,6 +83,28 @@ export default function CheckoutClient() {
     }
   };
 
+  if (cart.length === 0) {
+    return (
+      <div className="mx-auto max-w-6xl px-6 py-16">
+        <div className="mb-10">
+          <p className="section-eyebrow mb-3">Your Order</p>
+          <h1 className="font-display text-4xl font-semibold md:text-5xl">
+            Checkout
+          </h1>
+        </div>
+
+        <div className="glass-card max-w-2xl p-8 text-center sm:p-10">
+          <p className="mb-5 text-white/60">
+            Your order is empty. Browse the menu to add meals and snacks.
+          </p>
+          <Link href="/menu" className="btn-primary inline-flex">
+            Browse Menu
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto max-w-6xl px-6 py-16">
       <div className="mb-10">
@@ -94,19 +116,9 @@ export default function CheckoutClient() {
 
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_1fr]">
         <div>
-          {cart.length === 0 ? (
-            <div className="glass-card p-10 text-center">
-              <p className="mb-4 text-white/60">
-                Your order is empty. Browse the menu to add meals and snacks.
-              </p>
-              <Link href="/menu" className="btn-primary inline-flex">
-                Browse Menu
-              </Link>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {cart.map((line) => (
-                <div key={line.menuItem.id} className="glass-card flex items-center gap-4 p-4">
+          <div className="space-y-4">
+            {cart.map((line) => (
+              <div key={line.menuItem.id} className="glass-card flex items-center gap-4 p-4">
                   <div className="flex-1">
                     <p className="font-display font-semibold">{line.menuItem.name}</p>
                     {line.specialRequest && (
@@ -144,17 +156,16 @@ export default function CheckoutClient() {
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
-                </div>
-              ))}
-
-              <div className="glass-card flex items-center justify-between p-5">
-                <span className="text-white/70">Total</span>
-                <span className="font-display text-xl font-semibold text-gold">
-                  {formatCurrency(total)}
-                </span>
               </div>
+            ))}
+
+            <div className="glass-card flex items-center justify-between p-5">
+              <span className="text-white/70">Total</span>
+              <span className="font-display text-xl font-semibold text-gold">
+                {formatCurrency(total)}
+              </span>
             </div>
-          )}
+          </div>
 
           <div className="mt-10">
             <PolicyCard compact />

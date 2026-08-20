@@ -4,7 +4,6 @@ import './globals.css';
 import { CartProvider } from '@/hooks/useCart';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -26,11 +25,11 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   title: {
-    default: "Tracy's Kitchen | Fresh Homemade Meals & Snacks, Made to Order",
+    default: "Tracy's Kitchen | Homemade Meals & Pre-Order in Laurel, MD",
     template: "%s | Tracy's Kitchen",
   },
   description:
-    "Tracy's Kitchen prepares fresh homemade meals and snacks exclusively by pre-order in Laurel, MD. Choose pickup or delivery and order in minutes.",
+    "Fresh homemade meals and snacks from Tracy's Kitchen in Laurel, Maryland. Browse our menu and pre-order for pickup or delivery.",
   keywords: [
     "Tracy's Kitchen",
     'Laurel MD food',
@@ -39,21 +38,28 @@ export const metadata: Metadata = {
     'African food delivery Maryland',
   ],
   openGraph: {
-    title: "Tracy's Kitchen | Fresh Homemade Meals & Snacks",
+    title: "Tracy's Kitchen | Homemade Meals & Pre-Order in Laurel, MD",
     description:
-      'Fresh meals and snacks made exclusively by pre-order. Pickup or delivery in Laurel, MD.',
+      "Fresh homemade meals and snacks from Tracy's Kitchen in Laurel, Maryland. Pre-order for pickup or delivery.",
     url: siteUrl,
     siteName: "Tracy's Kitchen",
     locale: 'en_US',
     type: 'website',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    images: [
+      {
+        url: '/tracys-kitchen-logo.jpg',
+        width: 1254,
+        height: 1254,
+        alt: "Tracy's Kitchen logo",
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Tracy's Kitchen | Fresh Homemade Meals & Snacks",
+    title: "Tracy's Kitchen | Homemade Meals & Pre-Order in Laurel, MD",
     description:
-      'Fresh meals and snacks made exclusively by pre-order. Pickup or delivery in Laurel, MD.',
-    images: ['/og-image.jpg'],
+      "Fresh homemade meals and snacks from Tracy's Kitchen in Laurel, Maryland. Pre-order for pickup or delivery.",
+    images: ['/tracys-kitchen-logo.jpg'],
   },
   robots: { index: true, follow: true },
 };
@@ -68,7 +74,8 @@ export default function RootLayout({
     '@type': 'Restaurant',
     name: "Tracy's Kitchen",
     url: siteUrl,
-    image: `${siteUrl}/og-image.jpg`,
+    logo: `${siteUrl}/tracys-kitchen-logo.jpg`,
+    image: `${siteUrl}/tracys-kitchen-logo.jpg`,
     telephone: '+1-301-256-7848',
     email: 'Tracyayuk3@gmail.com',
     address: {
@@ -79,13 +86,8 @@ export default function RootLayout({
       postalCode: '20724',
       addressCountry: 'US',
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 39.0925,
-      longitude: -76.8194,
-    },
-    servesCuisine: ['African', 'Homemade'],
-    priceRange: '$$',
+    servesCuisine: ['African'],
+    hasMenu: `${siteUrl}/menu`,
     sameAs: [
       'https://www.facebook.com/jae.cutes.7',
       'https://www.instagram.com/jae.cutes.7',
@@ -93,25 +95,46 @@ export default function RootLayout({
     ],
   };
 
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: "Tracy's Kitchen",
+    url: siteUrl,
+  };
+
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${inter.variable}`}
+      data-theme="light"
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{document.documentElement.dataset.theme=localStorage.getItem('tracys-kitchen-theme')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}",
+          }}
+        />
+      </head>
       <body className="font-body bg-charcoal text-white antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([websiteSchema, localBusinessSchema]),
+          }}
         />
         <CartProvider>
           <Navbar />
           <main className="min-h-screen">{children}</main>
-          <Footer />
         </CartProvider>
         <Toaster
           position="top-center"
           toastOptions={{
             style: {
-              background: '#1B1B1B',
-              color: '#fff',
-              border: '1px solid rgba(208,154,32,0.22)',
+              background: 'var(--toast-bg)',
+              color: 'var(--toast-text)',
+              border: '1px solid var(--toast-border)',
             },
           }}
         />
