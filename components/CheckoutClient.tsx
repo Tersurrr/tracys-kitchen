@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,6 +26,8 @@ type FormValues = z.infer<typeof schema>;
 export default function CheckoutClient() {
   const { cart, updateQuantity, removeFromCart, total, clearCart } = useCart();
   const [submitting, setSubmitting] = useState(false);
+  const [whatsAppLink, setWhatsAppLink] = useState<string | null>(null);
+  const submitLockRef = useRef(false);
 
   const {
     register,
@@ -40,13 +42,24 @@ export default function CheckoutClient() {
 
   const deliveryType = watch('deliveryType');
 
+  const continueToWhatsApp = () => {
+    if (whatsAppLink) {
+      window.location.assign(whatsAppLink);
+    }
+  };
+
   const onSubmit = async (values: FormValues) => {
+    if (submitLockRef.current || submitting) return;
+
     if (cart.length === 0) {
       toast.error('Your order is empty. Add something from the menu first.');
       return;
     }
 
+    submitLockRef.current = true;
     setSubmitting(true);
+    setWhatsAppLink(null);
+
     try {
       const result = await placeOrder({
         customerName: values.customerName,
@@ -57,8 +70,7 @@ export default function CheckoutClient() {
       });
 
       if (!result.success) {
-        toast.error('Something went wrong saving your order. Please try again.');
-        setSubmitting(false);
+        toast.error(result.error ?? 'Something went wrong saving your order. Please try again.');
         return;
       }
 
@@ -71,19 +83,46 @@ export default function CheckoutClient() {
       });
 
       const link = buildWhatsAppLink(message);
-      window.open(link, '_blank');
-
-      toast.success('Order saved! Finish up on WhatsApp.');
+      setWhatsAppLink(link);
       clearCart();
+      toast.success('Order saved! Finish up on WhatsApp.');
+
+      try {
+        window.location.assign(link);
+      } catch {
+        toast.error('Order saved, but WhatsApp did not open. Tap Continue to WhatsApp.');
+      }
     } catch (err) {
       console.error(err);
-      toast.error('Something went wrong. Please try again.');
+      toast.error('We could not save your order. Please try again.');
     } finally {
+      submitLockRef.current = false;
       setSubmitting(false);
     }
   };
 
   if (cart.length === 0) {
+    if (whatsAppLink) {
+      return (
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <div className="glass-card max-w-2xl p-8 text-center sm:p-10">
+            <p className="section-eyebrow mb-3">Order Saved</p>
+            <h1 className="font-display text-3xl font-semibold sm:text-4xl">
+              Finish Up on WhatsApp
+            </h1>
+            <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/60 sm:text-base">
+              Your order has been saved. If WhatsApp did not open automatically,
+              continue with the same saved order here.
+            </p>
+            <button onClick={continueToWhatsApp} className="btn-primary mt-6 inline-flex">
+              <MessageCircle className="h-4 w-4" />
+              Continue to WhatsApp
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-10">
