@@ -27,6 +27,14 @@ export async function placeOrder({
     return { success: false, error: 'Name, phone, and at least one item are required.' };
   }
 
+  const invalidQuantity = cleanedCart.some(
+    (line) => !Number.isInteger(line.quantity) || line.quantity < 1
+  );
+
+  if (invalidQuantity) {
+    return { success: false, error: 'Please choose valid item quantities.' };
+  }
+
   const itemIds = [...new Set(cleanedCart.map((line) => line.menuItem.id))];
   const { data: menuItems, error: menuError } = await supabase
     .from('menu_items')
@@ -36,6 +44,15 @@ export async function placeOrder({
   if (menuError) return { success: false, error: menuError.message };
 
   const menuById = new Map(menuItems?.map((item) => [item.id, item]) ?? []);
+  const missingItem = cleanedCart.find((line) => !menuById.has(line.menuItem.id));
+
+  if (missingItem) {
+    return {
+      success: false,
+      error: `${missingItem.menuItem.name} is no longer available for preorder.`,
+    };
+  }
+
   const unavailableItem = cleanedCart.find((line) => !menuById.get(line.menuItem.id)?.available);
 
   if (unavailableItem) {
@@ -81,6 +98,12 @@ export async function placeOrder({
 
   if (itemsError) {
     console.error('placeOrder items error', itemsError);
+    const { error: rollbackError } = await supabase.from('orders').delete().eq('id', orderId);
+
+    if (rollbackError) {
+      console.error('placeOrder rollback error', rollbackError);
+    }
+
     return { success: false, error: itemsError.message };
   }
 
