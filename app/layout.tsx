@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import { Fraunces, Inter } from 'next/font/google';
 import './globals.css';
-import { CartProvider } from '@/hooks/useCart';
 import { Toaster } from 'react-hot-toast';
-import Navbar from '@/components/Navbar';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -124,10 +122,7 @@ export default function RootLayout({
             __html: JSON.stringify([websiteSchema, localBusinessSchema]),
           }}
         />
-        <CartProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-        </CartProvider>
+        {children}
         <Toaster
           position="top-center"
           toastOptions={{
