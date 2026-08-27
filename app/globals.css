@@ -227,6 +227,15 @@ html[data-theme='light'] .dark-surface [class*='border-white'] {
   color: #111111;
 }
 
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+    line-height: 1.5rem;
+  }
+}
+
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,
